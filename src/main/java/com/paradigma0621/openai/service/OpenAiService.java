@@ -20,11 +20,14 @@ public class OpenAiService {
 	}
 
 	public ChatResponse generateAnswer(String question) {
-		OpenAiChatOptions options = new OpenAiChatOptions();
+		/*OpenAiChatOptions options = new OpenAiChatOptions();
 		options.setModel("gpt-4o");
 		options.setTemperature(1.0);
 		options.setMaxTokens(4000);
 
 		return chatClient.prompt(new Prompt(question, options)).call().chatResponse();
+		*/
+
+		return chatClient.prompt(question).call().chatResponse();
 	}
 }
