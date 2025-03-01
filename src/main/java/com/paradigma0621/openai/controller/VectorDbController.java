@@ -21,4 +21,13 @@ public class VectorDbController {
         response.forEach(doc -> result.append(doc.getContent()).append("\n\n"));
         return result.toString();
     }
+
+    @PostMapping("/jobSearchHelperCounted")
+    public String jobSearchHelperCounted(@RequestBody String query) {
+        var response = service.searchJobsCounted(query);
+        var result = new StringBuilder();
+        response.forEach(doc -> result.append(doc.getContent()).append("\n\n"));
+        return result.toString();
+    }
+
 }
