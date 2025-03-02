@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class OpenAiService {
 
-	private ChatClient chatClient;
+	private final ChatClient chatClient;
 
 	public OpenAiService(ChatClient.Builder builder) {
 		chatClient = builder.defaultAdvisors(

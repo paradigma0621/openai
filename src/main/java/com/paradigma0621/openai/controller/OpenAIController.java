@@ -15,7 +15,7 @@ public class OpenAIController {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenAIController.class);
 
-    private OpenAiService service;
+    private final OpenAiService service;
 
     @PostMapping("/askAnything")
     public String askAnything(@RequestBody String question) {

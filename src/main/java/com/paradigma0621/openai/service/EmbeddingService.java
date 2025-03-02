@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class EmbeddingService {
 
-    private EmbeddingModel embeddingModel;
+    private final EmbeddingModel embeddingModel;
 
     public float[] embed(String text) {
         return embeddingModel.embed(text);

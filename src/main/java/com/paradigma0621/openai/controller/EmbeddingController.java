@@ -10,7 +10,7 @@ import java.util.Arrays;
 @RestController
 public class EmbeddingController {
 
-    private EmbeddingService service;
+    private final EmbeddingService service;
 
     @PostMapping("/embedding")
     public String embed(@RequestBody String text) { // 'text' can be any string (a single word or a sentence)
