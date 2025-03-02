@@ -15,15 +15,20 @@ public class AudioService {
     private final OpenAiAudioTranscriptionModel openaiAudioTranscriptionModel;
 
     public String speechToText(String path) {
-        OpenAiAudioTranscriptionOptions options = OpenAiAudioTranscriptionOptions
+       /*  Transcribes the given audio file without translation into a specific language
+           and without including time references in the output.
+        var transcriptionPrompt = new AudioTranscriptionPrompt(new FileSystemResource(path));
+        return openaiAudioTranscriptionModel.call(transcriptionPrompt).getResult().getOutput();  */
+
+        /* Transcribes the given audio file while translating it into a specific language
+           (in this case, French) and includes time references using the VTT (WebVTT) format. */
+        var options = OpenAiAudioTranscriptionOptions
                 .builder()
-                .withLanguage("pt")
+                .withLanguage("fr")
                 .withResponseFormat(OpenAiAudioApi.TranscriptResponseFormat.VTT)
                 .build();
 
-        AudioTranscriptionPrompt transcriptionPrompt = new AudioTranscriptionPrompt(
-                new FileSystemResource(path),
-                options);
+        var transcriptionPrompt = new AudioTranscriptionPrompt(new FileSystemResource(path), options);
 
         return openaiAudioTranscriptionModel.call(transcriptionPrompt).getResult().getOutput();
     }
