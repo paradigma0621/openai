@@ -8,6 +8,7 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.Map;
 
@@ -74,5 +75,9 @@ public class OpenAiService {
 
 		return chatClient.prompt(prompt).call().entity(CountryCuisines.class); // Return the entity CountryCuisines, in
 																				// witch field is a Collection
+	}
+
+	public Flux<String> streamAnswer(String question) {
+		return chatClient.prompt(question).stream().content();
 	}
 }

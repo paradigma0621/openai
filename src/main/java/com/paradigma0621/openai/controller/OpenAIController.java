@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 @AllArgsConstructor
 @RestController
@@ -39,4 +40,10 @@ public class OpenAIController {
                                            @RequestParam("language") String language) {
         return service.getCuisines(country, numCuisines, language);
     }
+
+    @GetMapping("/stream")
+    public Flux<String> streamAnswer(@RequestParam String question) {
+        return service.streamAnswer(question);
+    }
+
 }
