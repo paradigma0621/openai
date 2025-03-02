@@ -2,10 +2,11 @@ package com.paradigma0621.openai.controller;
 
 import com.paradigma0621.openai.service.AudioService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,6 +46,16 @@ public class AudioController {
             e.printStackTrace();
             return "Failed to upload file - due to: " + e.getMessage();
         }
+    }
+
+    @PostMapping("/textToSpeech")
+    public ResponseEntity<byte[]> streamAudio(@RequestBody String text) throws IOException {
+        // Set headers to indicate streaming audio
+        var headers = new HttpHeaders();
+        headers.set(HttpHeaders.CONTENT_TYPE, "audio/mpeg");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=output.mp3");
+
+        return new ResponseEntity<>(service.textToSpeech(text), headers, HttpStatus.OK);
     }
 
 }

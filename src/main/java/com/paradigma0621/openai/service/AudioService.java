@@ -2,6 +2,7 @@ package com.paradigma0621.openai.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
+import org.springframework.ai.openai.OpenAiAudioSpeechModel;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionModel;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionOptions;
 import org.springframework.ai.openai.api.OpenAiAudioApi;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class AudioService {
 
     private final OpenAiAudioTranscriptionModel openaiAudioTranscriptionModel;
+
+    private final OpenAiAudioSpeechModel openaiAudioSpeechModel;
 
     public String speechToText(String path) {
        /*  Transcribes the given audio file without translation into a specific language
@@ -33,4 +36,7 @@ public class AudioService {
         return openaiAudioTranscriptionModel.call(transcriptionPrompt).getResult().getOutput();
     }
 
+    public byte[] textToSpeech(String text) {
+        return openaiAudioSpeechModel.call(text);
+    }
 }
