@@ -14,7 +14,7 @@ public class EmbeddingController {
 
     @PostMapping("/embedding")
     public String embed(@RequestBody String text) { // 'text' can be any string (a single word or a sentence)
-        float[] response = service.embed(text);
+        var response = service.embed(text);
         return Arrays.toString(response);
     }
 

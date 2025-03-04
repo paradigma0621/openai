@@ -5,7 +5,6 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -36,7 +35,7 @@ public class OpenAiService {
 	}
 
 	public String getTravelGuidance(String city, String month, String language, String budget) {
-		String promptPattern =
+		var promptPattern =
 				"""
 				Welcome to the {city} travel guide!
 				If you're visiting in {month}, here's what you can do: 
@@ -47,9 +46,9 @@ public class OpenAiService {
 				Enjoy your trip!
 				""";
 
-		PromptTemplate promptTemplate = new PromptTemplate(promptPattern);
+		var promptTemplate = new PromptTemplate(promptPattern);
 
-		Prompt prompt = promptTemplate
+		var prompt = promptTemplate
 				.create(Map.of("city", city, "month", month, "language", language, "budget", budget));
 
 		return chatClient.prompt(prompt).call().chatResponse().getResult().getOutput().getContent();
@@ -57,20 +56,20 @@ public class OpenAiService {
 
 	public CountryCuisines getCuisines(String country, String numCuisines, String language) {
 
-		String promptModel = """
-		You are an expert in traditional cuisines.
-		Answer the question: What is the traditional cuisine of {country}?
-		Return a list of {numCuisines} in {language}.
-		You provide information about a specific dish
-		from a specific country.
-		Avoid giving information about fictional places.
-		If the country is fictional or non-existent
-		return the country with out any cuisines.
-		""";
+		var promptModel = """
+			You are an expert in traditional cuisines.
+			Answer the question: What is the traditional cuisine of {country}?
+			Return a list of {numCuisines} in {language}.
+			You provide information about a specific dish
+			from a specific country.
+			Avoid giving information about fictional places.
+			If the country is fictional or non-existent
+			return the country with out any cuisines.
+			""";
 
-		PromptTemplate promptTemplate = new PromptTemplate(promptModel);
+		var promptTemplate = new PromptTemplate(promptModel);
 
-		Prompt prompt = promptTemplate
+		var prompt = promptTemplate
 				.create(Map.of("country", country, "numCuisines", numCuisines, "language", language));
 
 		return chatClient.prompt(prompt).call().entity(CountryCuisines.class); // Return the entity CountryCuisines, in
