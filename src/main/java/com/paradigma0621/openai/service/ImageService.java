@@ -29,10 +29,18 @@ public class ImageService {
         return response.getResult().getOutput().getUrl();
     }
 
-
     public String explainImage(String prompt, String path) {
         return chatClient.prompt()
                 .user(u -> u.text(prompt).media(MimeTypeUtils.IMAGE_JPEG, new FileSystemResource(path))).call()
                 .content();
+    }
+
+    public String process2Images(String prompt, String path1, String path2) {
+        String explanation = chatClient.prompt()
+                .user(u -> u.text(prompt)
+                        .media(MimeTypeUtils.IMAGE_JPEG, new FileSystemResource(path1))
+                        .media(MimeTypeUtils.IMAGE_JPEG, new FileSystemResource(path2)))
+                .call().content();
+        return explanation;
     }
 }
