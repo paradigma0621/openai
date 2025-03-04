@@ -1,6 +1,6 @@
 package com.paradigma0621.openai.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
 import org.springframework.ai.openai.OpenAiAudioSpeechModel;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionModel;
@@ -9,7 +9,7 @@ import org.springframework.ai.openai.api.OpenAiAudioApi;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class AudioService {
 

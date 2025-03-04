@@ -1,10 +1,10 @@
 package com.paradigma0621.openai.controller;
 
 import com.paradigma0621.openai.service.VectorDbService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 public class VectorDbController {
 

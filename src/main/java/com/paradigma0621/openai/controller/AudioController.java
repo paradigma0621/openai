@@ -1,22 +1,19 @@
 package com.paradigma0621.openai.controller;
 
 import com.paradigma0621.openai.service.AudioService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 public class AudioController {
 
@@ -49,7 +46,7 @@ public class AudioController {
     }
 
     @PostMapping("/textToSpeech")
-    public ResponseEntity<byte[]> streamAudio(@RequestBody String text) throws IOException {
+    public ResponseEntity<byte[]> streamAudio(@RequestBody String text) {
         // Set headers to indicate streaming audio
         var headers = new HttpHeaders();
         headers.set(HttpHeaders.CONTENT_TYPE, "audio/mpeg");

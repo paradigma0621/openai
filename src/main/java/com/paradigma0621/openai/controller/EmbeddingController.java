@@ -1,12 +1,12 @@
 package com.paradigma0621.openai.controller;
 
 import com.paradigma0621.openai.service.EmbeddingService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 public class EmbeddingController {
 
